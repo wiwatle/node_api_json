@@ -17,12 +17,12 @@ const writeData = (data) => fs.writeFileSync(DATA_FILE, JSON.stringify(data, nul
 // --- ROUTES ---
 
 // GET: Fetch all items
-app.get('/items', (req, res) => {
+app.get('/students', (req, res) => {
     res.json(readData());
 });
 
 // POST: Create a new item
-app.post('/items', (req, res) => {
+app.post('/students', (req, res) => {
     const data = readData();
     const newItem = { id: Date.now(), ...req.body };
     data.push(newItem);
@@ -31,7 +31,7 @@ app.post('/items', (req, res) => {
 });
 
 // PUT: Update an item by ID
-app.put('/items/:id', (req, res) => {
+app.put('/students/:id', (req, res) => {
     let data = readData();
     const index = data.findIndex(i => i.id === parseInt(req.params.id));
     
@@ -45,11 +45,11 @@ app.put('/items/:id', (req, res) => {
 });
 
 // DELETE: Remove an item
-app.delete('/items/:id', (req, res) => {
+app.delete('/students/:id', (req, res) => {
     let data = readData();
     const filteredData = data.filter(i => i.id !== parseInt(req.params.id));
     writeData(filteredData);
     res.status(204).send();
 });
 
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+//app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
